@@ -1,0 +1,171 @@
+
+> nexus-backend@1.0.0 test C:\Users\Admin\Desktop\nexus-platform\backend
+> jest --runInBand
+
+FAIL src/tests/admin.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../models/userModel' from 'src/tests/admin.test.js'
+
+    [0m [90m  5 |[39m
+     [90m  6 |[39m [90m// Mock the model layer[39m
+    [31m[1m>[22m[39m[90m  7 |[39m jest[33m.[39mmock([32m'../models/userModel'[39m)[33m;[39m
+     [90m    |[39m      [31m[1m^[22m[39m
+     [90m  8 |[39m jest[33m.[39mmock([32m'../utils/logger'[39m)[33m;[39m
+     [90m  9 |[39m
+     [90m 10 |[39m describe([32m'Admin Bulk Actions'[39m[33m,[39m () [33m=>[39m {[0m
+
+      at Resolver._throwModNotFoundError (../node_modules/.pnpm/jest-resolve@29.7.0/node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.mock (src/tests/admin.test.js:7:6)
+
+FAIL tests/webhook.test.js
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    C:\Users\Admin\Desktop\nexus-platform\backend\tests\webhook.test.js:43
+    import request from 'supertest';
+    ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+
+      at Runtime.createScriptFromCode (../node_modules/.pnpm/jest-runtime@29.7.0/node_modules/jest-runtime/build/index.js:1505:14)
+
+FAIL src/tests/auth.test.js
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    C:\Users\Admin\Desktop\nexus-platform\backend\src\tests\auth.test.js:9
+    import request from 'supertest';
+    ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+
+      at Runtime.createScriptFromCode (../node_modules/.pnpm/jest-runtime@29.7.0/node_modules/jest-runtime/build/index.js:1505:14)
+
+FAIL tests/worker.test.js
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    C:\Users\Admin\Desktop\nexus-platform\backend\tests\worker.test.js:28
+    import { processQueue } from '../src/workers/processWebhookQueue.js';
+    ^^^^^^
+
+    SyntaxError: Cannot use import statement outside a module
+
+      at Runtime.createScriptFromCode (../node_modules/.pnpm/jest-runtime@29.7.0/node_modules/jest-runtime/build/index.js:1505:14)
+
+FAIL src/tests/webhook.integration.test.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at ../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:254:19
+      at ../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:361:23)
+
+FAIL src/tests/userModel.integration.test.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at ../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:254:19
+      at ../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:361:23)
+
+FAIL src/tests/user.integration.test.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at ../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:254:19
+      at ../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:361:23)
+
+FAIL src/tests/payment.integration.test.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at ../node_modules/.pnpm/@jest+core@29.7.0/node_modules/@jest/core/build/TestScheduler.js:254:19
+      at ../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/.pnpm/emittery@0.13.1/node_modules/emittery/index.js:361:23)
+
+Test Suites: 8 failed, 8 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        12.108 s
+Ran all test suites.
+C:\Users\Admin\Desktop\nexus-platform\backend:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  nexus-backend@1.0.0 test: `jest --runInBand`
+Exit status 1
