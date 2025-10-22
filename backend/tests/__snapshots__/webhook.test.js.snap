@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webhook route returns 200 for valid event and idempotency 1`] = `
+{
+  "enqueued": true,
+  "received": true,
+}
+`;
