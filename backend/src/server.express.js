@@ -18,6 +18,8 @@ await initSentry(app);
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.get("/api/gov/health", govHealthHandler);
+// Lightweight ping endpoint for deployed verification
+app.get("/api/ping", (_req, res) => res.json({ ok: true, time: Date.now() }));
 app.use("/api/payments", payments);
 app.use("/api/docs", openapi);
 app.use("/api/gdpr", gdpr);
