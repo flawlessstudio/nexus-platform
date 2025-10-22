@@ -40,10 +40,10 @@ jobs:
           fi
 
       - name: Typecheck
-        run: pnpm -r typecheck || true
+        run: pnpm -r typecheck
 
       - name: Tests
-        run: pnpm -r test || true
+        run: pnpm -r test
 
       - name: Lint
         run: pnpm -r lint

@@ -46,3 +46,4 @@ dist/
 coverage/
 
 .early.coverage
+.vercel
