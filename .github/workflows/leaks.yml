@@ -1,0 +1,18 @@
+# .github/workflows/leaks.yml
+name: Secret Leaks Scan
+
+on: [push, pull_request]
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for gitleaks
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          config-path: .gitleaks.toml # Optional: create this file for custom rules

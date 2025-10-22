@@ -1,0 +1,45 @@
+name: V1 Guardian & Doctor Audit
+
+on:
+  workflow_dispatch: # Allows manual runs from the Actions tab
+
+jobs:
+  run-audits:
+    name: Run V1 Audits
+    # Prevent multiple manual runs from overlapping
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    # Set minimum permissions for the job
+    permissions:
+      contents: write # To commit changes from --apply
+      pull-requests: write # To create pull requests if needed by a commit action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Audit Scripts
+        id: audits
+        uses: ./.github/actions/run-audits/
+
+      - name: Commit Changes
+        id: auto-commit-action
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(audit): apply automated fixes from guardian audit"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+      - name: Upload V1 Guardian Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: v1-guardian-report
+          path: ${{ steps.audits.outputs.guardian_report_path }}
+
+      - name: Upload Readiness Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: readiness-doctor-report
+          path: ${{ steps.audits.outputs.doctor_report_path }}

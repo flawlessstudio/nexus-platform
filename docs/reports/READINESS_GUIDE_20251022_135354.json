@@ -1,0 +1,107 @@
+{
+  "envSchema": {
+    "file": "backend/src/utils/env.js",
+    "keys": [
+      "NODE_ENV",
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "STRIPE_KEY",
+      "STRIPE_WEBHOOK_SECRET",
+      "OPENAI_API_KEY",
+      "SENTRY_DSN",
+      "TURNSTILE_SECRET"
+    ],
+    "ok": true
+  },
+  "envPresence": {
+    "files": {
+      "backend/.env": "NODE_ENV=development\r\n",
+      "web/.env": "SUPABASE_URL=https://xyfxfvdpozuxmfasrnbn.supabase.co\nSUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ZnhmdmRwb3p1eG1mYXNybmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMzc2NzUsImV4cCI6MjA3NTgxMzY3NX0.n3KntIMBu1pHKqtt0y4A388cm3melOywqpxZYF9HauY\nSTRIPE_KEY=sk_test_51SKMDlEZ7Ssts0dOCKbLrGUZTWJDQzVBPg7AvofbQELfZaeS2KBLqaEmRwXLrf1VQczDX0YJh7FZ4DWdmoDYYfzd00wg0MyJxQ\nSTRIPE_WEBHOOK_SECRET=whsec_S4mb73I9JU1Xktk8WoSmDcdHtGupljDk\nOPENAI_API_KEY=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\nSENTRY_DSN=https://5c2774a0f7394058bd1aca13c3102c38@o4510005049032704.ingest.de.sentry.io/4510222951186512\nTURNSTILE_SECRET=0x4AAAAAAB7uCCYXIwy_RpDquNo8Rt61NRQ\n"
+    },
+    "merged": {
+      "NODE_ENV": "development",
+      "SUPABASE_URL": "https://xyfxfvdpozuxmfasrnbn.supabase.co",
+      "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ZnhmdmRwb3p1eG1mYXNybmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMzc2NzUsImV4cCI6MjA3NTgxMzY3NX0.n3KntIMBu1pHKqtt0y4A388cm3melOywqpxZYF9HauY",
+      "STRIPE_KEY": "sk_test_51SKMDlEZ7Ssts0dOCKbLrGUZTWJDQzVBPg7AvofbQELfZaeS2KBLqaEmRwXLrf1VQczDX0YJh7FZ4DWdmoDYYfzd00wg0MyJxQ",
+      "STRIPE_WEBHOOK_SECRET": "whsec_S4mb73I9JU1Xktk8WoSmDcdHtGupljDk",
+      "OPENAI_API_KEY": "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",
+      "SENTRY_DSN": "https://5c2774a0f7394058bd1aca13c3102c38@o4510005049032704.ingest.de.sentry.io/4510222951186512",
+      "TURNSTILE_SECRET": "0x4AAAAAAB7uCCYXIwy_RpDquNo8Rt61NRQ"
+    },
+    "missing": []
+  },
+  "providers": {},
+  "frontend": {
+    "isCRA": false,
+    "isVite": true
+  },
+  "secBack": {
+    "server": "backend/src/server.js",
+    "hasHelmet": true,
+    "hasCSP": true,
+    "hasCookieParser": true,
+    "hasHealth": true,
+    "hasRequestId": true,
+    "hasRateLimit": true
+  },
+  "workflows": {
+    "list": [
+      "backend-ci.yml",
+      "cost-check.yml",
+      "deploy.yml",
+      "guardian-audit.yml",
+      "leaks.yml",
+      "nightly-audit.yml",
+      "pnpm-workspace.yaml",
+      "policy-check.yml",
+      "security-gates.yml",
+      "synthetic-monitor.yml",
+      "test-and-deploy.yml"
+    ],
+    "hasTestDeploy": true,
+    "hasLeaks": true,
+    "hasPolicyCheck": true,
+    "hasCostCheck": true,
+    "hasSecurityGates": true
+  },
+  "smells": {
+    "offendersSQL": [],
+    "offendersJWT": []
+  },
+  "docs": {
+    "missing": []
+  },
+  "archive": [],
+  "pkgManager": {
+    "ok": true,
+    "value": "pnpm@9.1.0"
+  },
+  "nvmrc": {
+    "ok": true,
+    "value": "v20"
+  },
+  "license": {
+    "ok": true,
+    "file": "LICENSE"
+  },
+  "gitignore": {
+    "ok": true,
+    "file": ".gitignore"
+  },
+  "contributing": {
+    "ok": true,
+    "file": "CONTRIBUTING.md"
+  },
+  "readme": {
+    "ok": true,
+    "file": "README.md"
+  },
+  "findings": {
+    "items": [],
+    "score": 0,
+    "criticals": 0,
+    "highs": 0
+  },
+  "generatedAt": "2025-10-22T11:53:54.031Z",
+  "version": "refactor-1.0.0"
+}

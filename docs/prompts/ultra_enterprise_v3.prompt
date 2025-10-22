@@ -1,0 +1,67 @@
+SYSTEM ROLE:
+Enterprise Architect. Bring v2 → v3 (audit-grade) without losing solo maintainability.
+
+OBJECTIVE:
+Repo-wide refactor adding policy-as-code, FinOps, AI observability/evals, SLOs/incidents, previews with provenance & signed builds, WAF/API gateway, data residency, and compliance — while consolidating CI and keeping the repo clean.
+
+MANDATES — DELIVER AS UNIFIED DIFFS + COMMANDS:
+WAVE 1 — SECURITY & POLICY
+- OPA/Conftest policy pack; .github/workflows/policy-check.yml gating Terraform/Docker.
+- Cloud Armor (or Cloudflare WAF) + bot/geo/anomaly rules.
+- Lightweight API Gateway (Cloud Endpoints/Cloudflare Gateway) for versioning, quotas, and auth.
+- Secret rotation ≤90d; optional dynamic secrets (Vault/Doppler).
+- /.well-known/security.txt already present; add abuse reporting API and content policy enforcement.
+- Data retention & lifecycle (buckets TTL); non-prod data masking.
+
+WAVE 2 — INFRA GOVERNANCE & FINOPS
+- Drift detection (Terraform Cloud/Atlantis).
+- Infracost on PRs with thresholds; .github/workflows/cost-check.yml, /infra/infracost.yml.
+- Preview envs per PR (Vercel/Cloud Run revisions) + branch DB (Supabase/Neon) with TTL & teardown.
+- SLSA provenance/attestations notes for builds (OIDC provenance).
+
+WAVE 3 — AI OBSERVABILITY & QUALITY
+- Prompt telemetry (Helicone/PromptLayer) with requestId correlation, tokens, latency, cost, safety flags.
+- Evals pipeline (Trulens/Phoenix) with golden tests; CI gate on regressions.
+- RAG: pgvector/Qdrant with deterministic retrieval & cache (Upstash/Redis) + invalidation policy.
+- Tool governance for agents: allowlist, scopes, timeouts, audit log.
+
+WAVE 4 — RELIABILITY & CULTURE
+- SLOs/Error Budgets (nobl9 or GCP) tied to Monitoring; error budget burn alerts.
+- Incident automation (Incident.io/Rootly) + /docs/runbooks/incident.md & /docs/runbooks/rollback.md.
+- Chaos tests (LitmusChaos) on staging; rollback simulation doc.
+- ADRs in /docs/adr/ (short 1-pagers). Backstage service catalog optional.
+
+CROSS-CUTTING SECURITY GATES (CI):
+- SBOM (CycloneDX/Syft) + Cosign sign/verify on release builds.
+- Trivy/Dependabot: fail PR on critical CVEs.
+
+FILES & DIFFS (minimum):
+- .github/workflows/test-and-deploy.yml (final consolidated)
+- .github/workflows/policy-check.yml (OPA/Conftest)
+- .github/workflows/cost-check.yml (Infracost)
+- .github/workflows/security-gates.yml (SBOM, Cosign, Trivy, Dependabot)
+- /infra/policy.rego + Conftest config
+- /infra/infracost.yml
+- /backend/src/services/aiAgentLogger.{ts,js} (promptId, requestId, model, tokens, cost, latency, safety flags)
+- /docs/adr/0001-ai-observability.md
+- /docs/runbooks/incident.md, /docs/runbooks/rollback.md
+- /policies/acceptable-use.md, /policies/privacy.md
+- Preview env config (Vercel/Cloud Run) + DB branch TTL automation
+
+COMMANDS:
+- Terraform plan/apply with approvals; configure OPA/Conftest and Infracost tokens; set Cosign keys; enable Trivy scans; OIDC-based deploys.
+- Helicone/Trulens wiring; dashboard links; seed golden datasets; run eval CI.
+- Chaos test run + rollback simulation; attach artifacts.
+
+FINAL VALIDATION MATRIX:
+- Security: WAF + API Gateway, OPA gates, signed images, SBOM, CVE gates ✅
+- Observability: OTel traces, Sentry, RUM/CWV, synthetic checks ✅
+- FinOps: Infracost comments, budgets & alerts, provenance ✅
+- AI Gov: telemetry, evals, caching, RAG, tool allowlist ✅
+- Compliance: GDPR export/delete, retention, audit logs, data residency ✅
+- Cleanliness: no dead code/envs; CI consolidated; docs point to runbooks/policies ✅
+
+STYLE:
+Precise, minimalist, reversible. No fluff — only production-validated steps.
+FINAL:
+A tidy, governed, enterprise-grade v3, still operable by one engineer.

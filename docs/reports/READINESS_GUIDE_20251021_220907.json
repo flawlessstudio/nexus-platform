@@ -1,0 +1,142 @@
+{
+  "envSchema": {
+    "file": "backend/src/utils/env.js",
+    "keys": [
+      "NODE_ENV",
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "STRIPE_KEY",
+      "STRIPE_WEBHOOK_SECRET",
+      "OPENAI_API_KEY",
+      "SENTRY_DSN",
+      "TURNSTILE_SECRET"
+    ],
+    "ok": true
+  },
+  "envPresence": {
+    "files": {
+      "backend/.env": "SUPABASE_URL=https://xyfxfvdpozuxmfasrnbn.supabase.co\nSUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ZnhmdmRwb3p1eG1mYXNybmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMzc2NzUsImV4cCI6MjA3NTgxMzY3NX0.n3KntIMBu1pHKqtt0y4A388cm3melOywqpxZYF9HauY\nSTRIPE_KEY=sk_test_51SKMDlEZ7Ssts0dOCKbLrGUZTWJDQzVBPg7AvofbQELfZaeS2KBLqaEmRwXLrf1VQczDX0YJh7FZ4DWdmoDYYfzd00wg0MyJxQ\nSTRIPE_WEBHOOK_SECRET=whsec_S4mb73I9JU1Xktk8WoSmDcdHtGupljDk\nOPENAI_API_KEY=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\nSENTRY_DSN=https://cecc737624c1fb08d19135ec5e04cee5@o4510005049032704.ingest.de.sentry.io/4510222945288272\nTURNSTILE_SECRET=0x4AAAAAAB7uCCYXIwy_RpDquNo8Rt61NRQ\n",
+      "web/.env": "SUPABASE_URL=https://xyfxfvdpozuxmfasrnbn.supabase.co\nSUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ZnhmdmRwb3p1eG1mYXNybmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMzc2NzUsImV4cCI6MjA3NTgxMzY3NX0.n3KntIMBu1pHKqtt0y4A388cm3melOywqpxZYF9HauY\nSTRIPE_KEY=sk_test_51SKMDlEZ7Ssts0dOCKbLrGUZTWJDQzVBPg7AvofbQELfZaeS2KBLqaEmRwXLrf1VQczDX0YJh7FZ4DWdmoDYYfzd00wg0MyJxQ\nSTRIPE_WEBHOOK_SECRET=whsec_S4mb73I9JU1Xktk8WoSmDcdHtGupljDk\nOPENAI_API_KEY=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\nSENTRY_DSN=https://5c2774a0f7394058bd1aca13c3102c38@o4510005049032704.ingest.de.sentry.io/4510222951186512\nTURNSTILE_SECRET=0x4AAAAAAB7uCCYXIwy_RpDquNo8Rt61NRQ\n"
+    },
+    "merged": {
+      "SUPABASE_URL": "https://xyfxfvdpozuxmfasrnbn.supabase.co",
+      "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5ZnhmdmRwb3p1eG1mYXNybmJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyMzc2NzUsImV4cCI6MjA3NTgxMzY3NX0.n3KntIMBu1pHKqtt0y4A388cm3melOywqpxZYF9HauY",
+      "STRIPE_KEY": "sk_test_51SKMDlEZ7Ssts0dOCKbLrGUZTWJDQzVBPg7AvofbQELfZaeS2KBLqaEmRwXLrf1VQczDX0YJh7FZ4DWdmoDYYfzd00wg0MyJxQ",
+      "STRIPE_WEBHOOK_SECRET": "whsec_S4mb73I9JU1Xktk8WoSmDcdHtGupljDk",
+      "OPENAI_API_KEY": "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",
+      "SENTRY_DSN": "https://5c2774a0f7394058bd1aca13c3102c38@o4510005049032704.ingest.de.sentry.io/4510222951186512",
+      "TURNSTILE_SECRET": "0x4AAAAAAB7uCCYXIwy_RpDquNo8Rt61NRQ"
+    },
+    "missing": [
+      "NODE_ENV"
+    ]
+  },
+  "providers": {},
+  "frontend": {
+    "isCRA": false,
+    "isVite": true
+  },
+  "secBack": {
+    "server": "backend/src/server.js",
+    "hasHelmet": true,
+    "hasCSP": true,
+    "hasCookieParser": true,
+    "hasHealth": true,
+    "hasRequestId": true,
+    "hasRateLimit": false
+  },
+  "workflows": {
+    "list": [
+      "backend-ci.yml",
+      "cost-check.yml",
+      "deploy.yml",
+      "guardian-audit.yml",
+      "leaks.yml",
+      "nightly-audit.yml",
+      "pnpm-workspace.yaml",
+      "policy-check.yml",
+      "security-gates.yml",
+      "synthetic-monitor.yml",
+      "test-and-deploy.yml"
+    ],
+    "hasTestDeploy": true,
+    "hasLeaks": true,
+    "hasPolicyCheck": true,
+    "hasCostCheck": true,
+    "hasSecurityGates": true
+  },
+  "smells": {
+    "offendersSQL": [],
+    "offendersJWT": []
+  },
+  "docs": {
+    "missing": [
+      "docs/runbooks/incident.md",
+      "docs/adr/ (directory)"
+    ]
+  },
+  "archive": [],
+  "pkgManager": {
+    "ok": true,
+    "value": "pnpm@9.1.0"
+  },
+  "nvmrc": {
+    "ok": true,
+    "value": "v20"
+  },
+  "license": {
+    "ok": false,
+    "error": "LICENSE file not found"
+  },
+  "gitignore": {
+    "ok": true,
+    "file": ".gitignore"
+  },
+  "contributing": {
+    "ok": false,
+    "error": "`CONTRIBUTING.md` file not found"
+  },
+  "readme": {
+    "ok": true,
+    "file": "README.md"
+  },
+  "findings": {
+    "items": [
+      {
+        "severity": "critical",
+        "title": "Missing ENV keys: NODE_ENV",
+        "details": "Add to backend/.env and Vercel env (VITE_* for web)."
+      },
+      {
+        "severity": "medium",
+        "title": "Rate limit middleware missing",
+        "details": "Create backend/src/middleware/rateLimit.(ts|js)."
+      },
+      {
+        "severity": "low",
+        "title": "Missing docs",
+        "details": "docs/runbooks/incident.md, docs/adr/ (directory)"
+      },
+      {
+        "severity": "medium",
+        "title": "Missing author in `package.json`",
+        "details": "Add an 'author' field to the root package.json to declare ownership."
+      },
+      {
+        "severity": "medium",
+        "title": "LICENSE file is missing or incomplete",
+        "details": "Error: LICENSE file not found. A standard license with a copyright notice is crucial for legal clarity."
+      },
+      {
+        "severity": "medium",
+        "title": "`CONTRIBUTING.md` is missing",
+        "details": "Error: `CONTRIBUTING.md` file not found. This file is important for guiding new contributors."
+      }
+    ],
+    "score": 23,
+    "criticals": 1,
+    "highs": 0
+  },
+  "generatedAt": "2025-10-21T20:09:07.254Z",
+  "version": "refactor-1.0.0"
+}

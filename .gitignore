@@ -1,0 +1,48 @@
+node_modules/
+pnpm-lock.yaml
+npm-debug.log*
+yarn.lock
+
+# local env files
+.env
+**/.env
+*.local
+
+# Vite / build
+dist/
+web/dist/
+admin/dist/
+build/
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# VSCode
+.vscode/
+
+# Docker
+docker-compose.override.yml
+
+# pnpm store
+.pnp.*
+node_modules/
+.pnpm-store/
+.env
+.env.*
+!.env.example
+logs/
+*.log
+build/
+dist/
+.vscode/
+.idea/
+.DS_Store
+coverage/
+
+.early.coverage

@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: nexus-redis
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks: [nexus-network]
+
+networks:
+  nexus-network:
+    driver: bridge

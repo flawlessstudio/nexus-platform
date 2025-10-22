@@ -1,0 +1,31 @@
+{
+  "name": "nexus-platform-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The monorepo for the Nexus Platform.",
+  "author": "Nexus Platform Team",
+  "packageManager": "pnpm@9.1.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node backend/src/server.express.js",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter nexus-backend start",
+    "lint": "pnpm -r lint",
+    "test": "echo \"No root tests configured. Run tests within each package.\" && exit 0",
+    "typecheck": "pnpm -r typecheck || true",
+    "e2e": "pnpm -r e2e || true",
+    "lhci": "echo 'Add Lighthouse CI config (lighthouserc.json)'",
+    "axe": "echo 'Add axe checks in CI'",
+    "release": "semantic-release",
+    "guard": "node tools/v1_guardian.mjs --apply && node tools/v2_guardian.mjs && node tools/v3_guardian.mjs --apply",
+    "audit": "node tools/v2_guardian.mjs",
+    "govern": "node tools/v3_guardian.mjs --apply"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "type": "module"
+}

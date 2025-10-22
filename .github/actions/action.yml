@@ -1,0 +1,69 @@
+name: 'Run Audit Scripts'
+description: 'Sets up the environment, installs dependencies, and runs both readiness_doctor and v1_guardian scripts.'
+
+outputs:
+  doctor_score_line:
+    description: "The summary line containing the risk score from the readiness doctor."
+    value: ${{ steps.doctor_run.outputs.score_line }}
+  guardian_status_line:
+    description: "The summary line containing the status from the v1 guardian."
+    value: ${{ steps.guardian_run.outputs.status_line }}
+  v2_guardian_status_line:
+    description: "The summary line containing the status from the v2 guardian."
+    value: ${{ steps.v2_guardian_run.outputs.status_line }}
+  doctor_report_path:
+    description: "Path to the generated readiness doctor report."
+    value: "reports/readiness_doctor_report.md"
+  guardian_report_path:
+    description: "Path to the generated v1 guardian report."
+    value: "reports/v1_guardian_report.md"
+
+  v2_guardian_report_path:
+    description: "Path to the generated v2 guardian report."
+    value: "reports/v2_guardian_report.md"
+runs:
+  using: "composite"
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
+
+    - name: Create reports directory
+      shell: bash
+      run: mkdir -p reports
+
+    - name: Run Readiness Doctor and Capture Score
+      id: doctor_run
+      shell: bash
+      run: |
+        DOCTOR_OUTPUT=$(node tools/readiness_doctor.mjs --apply | tee reports/readiness_doctor_report.md)
+        echo "${DOCTOR_OUTPUT}"
+        SCORE_LINE=$(echo "${DOCTOR_OUTPUT}" | grep 'Risk score:')
+        echo "score_line=${SCORE_LINE}" >> $GITHUB_OUTPUT
+
+    - name: Run V1 Guardian and Capture Status
+      id: guardian_run
+      shell: bash
+      run: |
+        GUARDIAN_OUTPUT=$(node tools/v1_guardian.mjs --apply | tee reports/v1_guardian_report.md)
+        echo "${GUARDIAN_OUTPUT}"
+        STATUS_LINE=$(echo "${GUARDIAN_OUTPUT}" | grep '# v1 Guardian')
+        echo "status_line=${STATUS_LINE}" >> $GITHUB_OUTPUT
+
+    - name: Run V2 Guardian and Capture Status
+      id: v2_guardian_run
+      shell: bash
+      run: |
+        V2_GUARDIAN_OUTPUT=$(node tools/v2_guardian.mjs --apply | tee reports/v2_guardian_report.md)
+        echo "${V2_GUARDIAN_OUTPUT}"
+        STATUS_LINE=$(echo "${V2_GUARDIAN_OUTPUT}" | grep '# v2 Guardian')
+        echo "status_line=${STATUS_LINE}" >> $GITHUB_OUTPUT
