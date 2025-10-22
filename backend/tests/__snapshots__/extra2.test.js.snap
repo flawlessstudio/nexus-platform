@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra2 snapshot 1`] = `
+{
+  "items": [
+    1,
+    2,
+    3,
+  ],
+  "meta": {
+    "ok": true,
+  },
+  "name": "extra2",
+}
+`;

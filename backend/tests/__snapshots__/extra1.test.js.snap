@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra1 snapshot 1`] = `
+{
+  "name": "extra1",
+  "ts": "<TS>",
+  "value": 1,
+}
+`;

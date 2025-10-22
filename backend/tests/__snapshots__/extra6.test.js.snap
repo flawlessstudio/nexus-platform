@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra6 snapshot 1`] = `
+{
+  "numbers": [
+    10,
+    20,
+    30,
+  ],
+  "sum": 60,
+}
+`;

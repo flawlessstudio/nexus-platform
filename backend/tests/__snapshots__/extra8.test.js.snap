@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra8 snapshot 1`] = `
+{
+  "nested": {
+    "a": 1,
+    "b": {
+      "c": 2,
+    },
+  },
+}
+`;

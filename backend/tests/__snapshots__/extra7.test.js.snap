@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra7 snapshot 1`] = `
+{
+  "lang": "en",
+  "msg": "hello",
+}
+`;
