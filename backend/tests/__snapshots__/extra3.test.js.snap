@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra3 snapshot 1`] = `
+{
+  "list": [
+    "a",
+    "b",
+    "c",
+  ],
+  "n": 3,
+  "ok": true,
+}
+`;

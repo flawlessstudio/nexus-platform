@@ -46,5 +46,10 @@ describe('webhook route', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.received).toBe(true);
+
+    // Normalize and snapshot the response body
+    const normalized = { ...res.body };
+    if (normalized.received_at) normalized.received_at = '<RECEIVED_AT>';
+    expect(normalized).toMatchSnapshot();
   });
 });

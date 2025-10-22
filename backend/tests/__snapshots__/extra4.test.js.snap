@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extra4 snapshot 1`] = `
+{
+  "payload": {
+    "amount": 42,
+    "id": "x",
+  },
+  "status": "ok",
+}
+`;

@@ -25,11 +25,11 @@ jobs:
         with:
           version: '9'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install dependencies (workspace)
+        run: pnpm -w install --frozen-lockfile
 
       - name: Build monorepo
-        run: pnpm -r build
+        run: pnpm -w -r build
 
       - name: Verify web build output
         run: |
@@ -40,10 +40,10 @@ jobs:
           fi
 
       - name: Typecheck
-        run: pnpm -r typecheck
+        run: pnpm -w -r typecheck
 
       - name: Tests
-        run: pnpm -r test
+        run: pnpm -w -r test
 
       - name: Lint
-        run: pnpm -r lint
+        run: pnpm -w -r lint
