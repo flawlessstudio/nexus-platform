@@ -1,5 +1,7 @@
 # 🌍 NEXUS - Your Immigration Journey Made Simple
 
+[![CI](https://github.com/flawlessstudio/nexus-platform/actions/workflows/build-check.yml/badge.svg)](https://github.com/flawlessstudio/nexus-platform/actions/workflows/build-check.yml)
+
 NEXUS is a secure and scalable immigration platform built on a modern, full-stack architecture. This repository contains the lean v1, optimized for a solo operator using Vercel and Supabase.
 
 ## ✨ What's Included?
