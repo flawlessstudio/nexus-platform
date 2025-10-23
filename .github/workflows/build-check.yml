@@ -1,4 +1,4 @@
-name: CI — Build check
+name: CI - Build check
 
 on:
   push:
@@ -7,9 +7,13 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Install & build
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
