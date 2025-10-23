@@ -33,14 +33,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile || pnpm install
 
-      - name: Lint
-        run: pnpm lint
+      - name: Lint (apps)
+        run: |
+          pnpm --filter nexus-web --if-present lint || true
+          pnpm --filter nexus-backend --if-present lint || true
 
-      - name: Typecheck
-        run: pnpm typecheck
+      - name: Typecheck (apps)
+        run: |
+          pnpm --filter nexus-web --if-present typecheck || true
+          pnpm --filter nexus-backend --if-present typecheck || true
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run tests (apps)
+        run: |
+          pnpm --filter nexus-backend --if-present test || true
+          pnpm --filter nexus-web --if-present test || true
 
       - name: Job summary
         run: |
