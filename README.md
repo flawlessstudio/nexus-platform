@@ -91,6 +91,12 @@ To run the audit and automatically open the generated report in your browser:
 node tools/readiness_doctor.mjs --open
 ```
 
+### CI workflows (maintainers)
+
+- Build Check and Doctors run automatically on pushes to `main` and on PRs.
+- If a workflow shows no status, push a new commit or open a PR to trigger it.
+- You can also re-run from the GitHub Actions UI (Actions → select workflow → Re-run).
+
 ## 🚀 Deployment
 
 This project is optimized for deployment on Vercel (frontend) and Supabase (database/auth).
