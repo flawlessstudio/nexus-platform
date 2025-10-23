@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   doctors:
@@ -28,4 +29,3 @@ jobs:
 
       - name: Run doctors
         run: pnpm -s doctors
-
