@@ -52,3 +52,21 @@ jobs:
 
       - name: Lint
         run: pnpm -w -r lint
+
+      - name: Job summary
+        run: |
+          echo "# Build Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Node: $(node -v)" >> $GITHUB_STEP_SUMMARY
+          echo "- PNPM: $(pnpm -v)" >> $GITHUB_STEP_SUMMARY
+          if [ -d "web/dist" ]; then
+            echo "- web/dist: present" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- web/dist: missing" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload web build (artifact)
+        if: success() && hashFiles('web/dist/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: web/dist

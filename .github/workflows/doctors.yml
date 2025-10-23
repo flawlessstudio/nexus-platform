@@ -32,4 +32,21 @@ jobs:
         run: pnpm install --frozen-lockfile || pnpm install
 
       - name: Run doctors
-        run: pnpm -s doctors
+        run: |
+          mkdir -p reports
+          pnpm -s doctors | tee reports/doctors.txt
+
+      - name: Upload doctor report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctors-report
+          path: reports/doctors.txt
+
+      - name: Job summary
+        if: always()
+        run: |
+          echo "# Doctors Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Node: $(node -v)" >> $GITHUB_STEP_SUMMARY
+          echo "- PNPM: $(pnpm -v)" >> $GITHUB_STEP_SUMMARY
+          echo "- Report artifact: doctors-report" >> $GITHUB_STEP_SUMMARY

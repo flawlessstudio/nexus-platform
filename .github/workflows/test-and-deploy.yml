@@ -42,6 +42,13 @@ jobs:
       - name: Run tests
         run: pnpm test
 
+      - name: Job summary
+        run: |
+          echo "# Test and Lint Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Node: $(node -v)" >> $GITHUB_STEP_SUMMARY
+          echo "- PNPM: $(pnpm -v)" >> $GITHUB_STEP_SUMMARY
+          echo "- Lint + Typecheck + Tests: completed" >> $GITHUB_STEP_SUMMARY
+
   deploy:
     name: Deploy to Vercel
     runs-on: ubuntu-latest

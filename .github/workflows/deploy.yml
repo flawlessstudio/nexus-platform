@@ -44,7 +44,7 @@ jobs:
       - name: Upload Readiness Report
         uses: actions/upload-artifact@v4
         with:
-          name: readiness-doctor-report
+          name: readiness_doctor_report
           path: reports/readiness_doctor_report.md
 
   lint-and-test:
