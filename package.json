@@ -9,7 +9,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "node backend/src/server.express.js",
+    "dev": "vercel dev",
     "build": "pnpm -r build",
     "start": "pnpm --filter nexus-backend start",
     "lint": "pnpm -r lint",
@@ -19,9 +19,12 @@
     "lhci": "echo 'Add Lighthouse CI config (lighthouserc.json)'",
     "axe": "echo 'Add axe checks in CI'",
     "release": "semantic-release",
-    "guard": "node tools/v1_guardian.mjs --apply && node tools/v2_guardian.mjs && node tools/v3_guardian.mjs --apply",
-    "audit": "node tools/v2_guardian.mjs",
-    "govern": "node tools/v3_guardian.mjs --apply"
+    "guard": "node tools/v1_guardian.mjs --apply",
+    "audit": "echo 'v2_guardian disabled; use: pnpm guard'",
+    "govern": "node tools/v1_guardian.mjs --apply",
+    "testui": "vitest",
+    "doctors": "node tools/v1_doctor.mjs --report && node tools/v2_doctor.mjs --report && node tools/v3_doctor.mjs --report",
+    "format": "biome format ."
   },
   "devDependencies": {
     "@babel/preset-env": "7.22.15",

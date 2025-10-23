@@ -31,7 +31,7 @@ must(".nvmrc",".nvmrc");
 // 2) package.json scripts (dev/guard/audit/govern)
 if (!X("package.json")) bad("package.json missing");
 else {
-  hasScript("dev","server.express.js") || hasScript("dev","server.js")
+  hasScript("dev","server.express.js") || hasScript("dev","server.js") || hasScript("dev","vercel dev")
     ? ok("script: dev")
     : bad("script: dev missing or not pointing to backend server");
   hasScript("guard") ? ok("script: guard") : warn("script: guard not found");

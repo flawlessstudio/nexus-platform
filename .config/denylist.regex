@@ -1,0 +1,8 @@
+# Disallowed patterns (defense-in-depth)
+# Matches any form of auto-booking attempts
+auto[-_ ]?book
+# Matches references to CAPTCHA bypassing
+captcha.*bypass
+# Matches headless click automation heuristics
+headless.*click\(
+headless click(

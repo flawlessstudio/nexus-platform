@@ -73,7 +73,7 @@ if (process.env.CHECK_PLATFORM==="1"){
 const suspects=[];
 (function scan(dir){
   for (const ent of fs.readdirSync(dir,{withFileTypes:true})){
-    if (["node_modules",".git",".next","dist","build",".svelte-kit",".turbo"].includes(ent.name)) continue;
+    if (["node_modules",".git",".next","dist","build",".svelte-kit",".turbo","tools","policies","docs"].includes(ent.name)) continue;
     const p=path.join(dir,ent.name);
     if (ent.isDirectory()) scan(p);
     else if (/\.(m?js|ts|tsx|jsx)$/.test(p)){

@@ -1,0 +1,6 @@
+{
+  "dailyRequestsMax": 5000,
+  "backoffMs": 5000,
+  "retryLimit": 3
+}
+

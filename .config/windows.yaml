@@ -1,0 +1,9 @@
+# Hot windows configuration for legal-first monitoring
+hot_windows:
+  - days: [1,2,3,4,5]
+    start: "08:00"
+    end: "12:00"
+  - days: [1,2,3,4,5]
+    start: "16:00"
+    end: "19:00"
+
