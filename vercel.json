@@ -13,6 +13,13 @@
       "use": "@vercel/node"
     }
   ],
+  "functions": {
+    "backend/src/server.express.js": {
+      "runtime": "nodejs20.x",
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
