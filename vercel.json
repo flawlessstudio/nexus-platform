@@ -21,14 +21,10 @@
     }
   },
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/src/server.express.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "web/dist/$1"
-    }
+    { "src": "/api/(.*)", "dest": "backend/src/server.express.js" },
+    { "handle": "filesystem" },
+    // SPA fallback: serve index.html for unmatched routes
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
     "NODE_ENV": "production"
