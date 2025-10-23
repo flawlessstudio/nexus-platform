@@ -34,7 +34,7 @@ jobs:
         run: pnpm -w install --frozen-lockfile || pnpm -w install
 
       - name: Build monorepo
-        run: pnpm -w -r build
+        run: pnpm -w -r --if-present build
 
       - name: Verify web build output
         run: |
