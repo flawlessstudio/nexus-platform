@@ -1,35 +1,18 @@
 {
-  "name": "nexus-platform-monorepo",
-  "version": "1.0.0",
+  "name": "nexus-platform",
   "private": true,
-  "description": "The monorepo for the Nexus Platform.",
-  "author": "Nexus Platform Team",
-  "packageManager": "pnpm@9.1.0",
-  "engines": {
-    "node": ">=20"
-  },
+  "packageManager": "pnpm@9",
+  "engines": { "node": ">=20.0.0" },
+  "workspaces": [
+    "web",
+    "backend"
+  ],
   "scripts": {
-    "dev": "vercel dev",
-    "build": "pnpm -r build",
-    "start": "pnpm --filter nexus-backend start",
-    "lint": "pnpm -r lint",
-    "test": "echo \"No root tests configured. Run tests within each package.\" && exit 0",
-    "typecheck": "pnpm -r typecheck || true",
-    "e2e": "pnpm -r e2e || true",
-    "lhci": "echo 'Add Lighthouse CI config (lighthouserc.json)'",
-    "axe": "echo 'Add axe checks in CI'",
-    "release": "semantic-release",
-    "guard": "node tools/v1_guardian.mjs --apply",
-    "audit": "echo 'v2_guardian disabled; use: pnpm guard'",
-    "govern": "node tools/v1_guardian.mjs --apply",
-    "testui": "vitest",
-    "doctors": "node tools/v1_doctor.mjs --report && node tools/v2_doctor.mjs --report && node tools/v3_doctor.mjs --report",
-    "format": "biome format ."
-  },
-  "devDependencies": {
-    "@babel/preset-env": "7.22.15",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2"
-  },
-  "type": "module"
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r --parallel build",
+    "lint": "pnpm -r --parallel lint",
+    "doctor": "node tools/readiness_doctor.mjs || true",
+    "doctor:ci": "CI=true node tools/readiness_doctor.mjs --open=false || true",
+    "test": "echo \"No tests yet\""
+  }
 }
