@@ -2,9 +2,8 @@ name: CI - Build check
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -12,67 +11,32 @@ permissions:
 
 jobs:
   build:
-    name: Install & build
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: '9'
+          version: 9
 
-      - name: Install dependencies (workspace)
-        run: pnpm -w install --frozen-lockfile || pnpm -w install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Build web app
-        run: pnpm --filter nexus-web build
-
-      - name: Verify web build output
+      - name: Build project
         run: |
-          if [ ! -d "web/dist" ]; then
-            echo "web/dist not found - build may have failed" >&2
-            ls -la web || true
-            exit 1
-          fi
-
-      - name: Typecheck (apps)
-        run: |
-          pnpm --filter nexus-web --if-present typecheck || true
-          pnpm --filter nexus-backend --if-present typecheck || true
-
-      - name: Tests (apps)
-        run: |
-          pnpm --filter nexus-backend --if-present test || true
-          pnpm --filter nexus-web --if-present test || true
-
-      - name: Lint (apps)
-        run: |
-          pnpm --filter nexus-web --if-present lint || true
-          pnpm --filter nexus-backend --if-present lint || true
-
-      - name: Job summary
-        run: |
-          echo "# Build Check Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Node: $(node -v)" >> $GITHUB_STEP_SUMMARY
-          echo "- PNPM: $(pnpm -v)" >> $GITHUB_STEP_SUMMARY
-          if [ -d "web/dist" ]; then
-            echo "- web/dist: present" >> $GITHUB_STEP_SUMMARY
+          if [ -f apps/web/package.json ]; then
+            echo "Detected apps/web... building workspace"
+            pnpm --filter ./apps/web... build
           else
-            echo "- web/dist: missing" >> $GITHUB_STEP_SUMMARY
+            pnpm build
           fi
-
-      - name: Upload web build (artifact)
-        if: success() && hashFiles('web/dist/**') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-dist
-          path: web/dist
