@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+const initialFormState = (user) => ({
+  firstName: user?.first_name || '',
+  lastName: user?.last_name || '',
+  email: user?.email || '',
+  phone: user?.phone || '',
+});
 
 const ProfileEditForm = ({ user, onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
-    firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    email: user?.email || '',
-    phone: user?.phone || '',
-  });
+  const [formData, setFormData] = useState(initialFormState(user));
+  const [error, setError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  useEffect(() => {
+    setFormData(initialFormState(user));
+  }, [user]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formData);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSaving(true);
+    setError('');
+
+    try {
+      await onSave(formData);
+    } catch (err) {
+      setError(err.message || 'Failed to save profile.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -50,7 +65,7 @@ const ProfileEditForm = ({ user, onSave, onCancel }) => {
           />
         </div>
       </div>
-      
+
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
@@ -64,7 +79,7 @@ const ProfileEditForm = ({ user, onSave, onCancel }) => {
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
-      
+
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
           Phone
@@ -78,7 +93,9 @@ const ProfileEditForm = ({ user, onSave, onCancel }) => {
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
-      
+
+      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+
       <div className="flex justify-end space-x-3 pt-4">
         <button
           type="button"
@@ -89,9 +106,10 @@ const ProfileEditForm = ({ user, onSave, onCancel }) => {
         </button>
         <button
           type="submit"
-          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          disabled={isSaving}
+          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
         >
-          Save Changes
+          {isSaving ? 'Saving…' : 'Save Changes'}
         </button>
       </div>
     </form>

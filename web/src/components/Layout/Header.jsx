@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth();
 
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
@@ -12,13 +12,25 @@ const Header = () => {
           NEXUS
         </Link>
         <div className="flex items-center space-x-6">
-          <NavLink to="/" className={({ isActive }) => isActive ? "text-indigo-600" : "text-gray-600 hover:text-indigo-600"}>Home</NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600')}
+          >
+            Home
+          </NavLink>
           {user ? (
             <>
-              <NavLink to="/profile" className={({ isActive }) => isActive ? "text-indigo-600" : "text-gray-600 hover:text-indigo-600"}>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => (isActive ? 'text-indigo-600' : 'text-gray-600 hover:text-indigo-600')}
+              >
                 Profile
               </NavLink>
-              <button onClick={logout} className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
+              <button
+                type="button"
+                onClick={signOut}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700"
+              >
                 Logout
               </button>
             </>

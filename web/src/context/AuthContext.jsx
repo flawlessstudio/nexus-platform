@@ -1,78 +1,92 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { isSupabaseConfigured, supabase } from '../services/supabaseClient.js';
 
-// Supabase client configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-const AuthContext = createContext({
+export const AuthContext = createContext({
   user: null,
   loading: true,
-  signIn: () => {},
-  signUp: () => {},
-  signOut: () => {},
+  signIn: async () => ({ data: null, error: new Error('Supabase is not configured.') }),
+  signUp: async () => ({ data: null, error: new Error('Supabase is not configured.') }),
+  signOut: async () => ({ error: new Error('Supabase is not configured.') }),
+  logout: async () => ({ error: new Error('Supabase is not configured.') }),
 });
+
+const createUnavailableError = () => new Error('Supabase client is not configured.');
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
+    if (!isSupabaseConfigured) {
       setLoading(false);
+      return undefined;
+    }
+
+    let isMounted = true;
+
+    const getInitialSession = async () => {
+      const { data: { session } = {} } = await supabase.auth.getSession();
+      if (isMounted) {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
     };
 
     getInitialSession();
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    const { data: { subscription } = {} } = supabase.auth.onAuthStateChange((_, session) => {
+      if (isMounted) {
         setUser(session?.user ?? null);
         setLoading(false);
       }
-    );
+    });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const signIn = async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { data, error };
+    if (!isSupabaseConfigured) {
+      return { data: null, error: createUnavailableError() };
+    }
+    return supabase.auth.signInWithPassword({ email, password });
   };
 
   const signUp = async (email, password, userData = {}) => {
-    const { data, error } = await supabase.auth.signUp({
+    if (!isSupabaseConfigured) {
+      return { data: null, error: createUnavailableError() };
+    }
+    return supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: userData,
-      },
+      options: { data: userData },
     });
-    return { data, error };
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    return { error };
+    if (!isSupabaseConfigured) {
+      return { error: createUnavailableError() };
+    }
+    return supabase.auth.signOut();
   };
 
-  const value = {
-    user,
-    loading,
-    signIn,
-    signUp,
-    signOut,
-  };
+  const contextValue = useMemo(
+    () => ({
+      user,
+      loading,
+      signIn,
+      signUp,
+      signOut,
+      logout: signOut,
+    }),
+    [loading, user],
+  );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext);
+
+export default AuthContext;
