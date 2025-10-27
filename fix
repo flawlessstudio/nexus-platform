@@ -1,0 +1,10 @@
+# 1️⃣  Remove the folder from git history (but keep it locally for Vercel CLI)
+git rm -r --cached .vercel
+
+# 2️⃣  Add it to .gitignore so it never comes back
+echo ".vercel" >> .gitignore
+
+# 3️⃣  Commit and push
+git add .gitignore
+git commit -m "chore: stop tracking .vercel (local Vercel metadata)"
+git push
