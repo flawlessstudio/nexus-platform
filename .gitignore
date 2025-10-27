@@ -50,3 +50,10 @@ coverage/
 
 pnpm-lock.yaml !/pnpm-lock.yaml
 
+
+.vercel
+backend/.env
+web/.env
+supabase/.env
+node_modules
+dist

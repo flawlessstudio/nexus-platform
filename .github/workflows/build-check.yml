@@ -1,37 +1,26 @@
 name: Build Check
-
 on:
   push:
     branches: [ main ]
   pull_request:
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-
       - name: Enable Corepack
         run: corepack enable
-
       - name: Install deps (monorepo)
         run: pnpm install --frozen-lockfile
-
       - name: Build web
         working-directory: web
         run: pnpm build
-
-      - name: Lint (optional)
-        run: pnpm lint || true
-
-      - name: Readiness Doctor (CI-safe)
-        run: pnpm doctor:ci
+      - name: Sanity Doctor
+        run: pnpm sanity:strict
