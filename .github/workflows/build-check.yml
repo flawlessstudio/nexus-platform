@@ -1,0 +1,51 @@
+name: Build Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2️⃣ Setup Node 20 with pnpm cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # 3️⃣ Enable Corepack (bundled with Node >=16.9)
+      - name: Enable Corepack
+        run: corepack enable
+
+      # 4️⃣ Ensure latest pnpm is active (avoids version drift)
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@latest --activate
+
+      # 5️⃣ Print versions for debugging
+      - name: Print tool versions
+        run: |
+          node -v
+          pnpm -v
+
+      # 6️⃣ Install all dependencies for the monorepo
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 7️⃣ Build the Vite web app
+      - name: Build frontend
+        working-directory: web
+        run: pnpm build
+
+      # 8️⃣ Run the Sanity Doctor (verifies envs, structure, etc.)
+      - name: Run Sanity Doctor
+        run: pnpm sanity:strict
