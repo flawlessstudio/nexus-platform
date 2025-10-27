@@ -28,7 +28,7 @@ Get NEXUS running locally in under 10 minutes. For a more condensed version, see
 
 1.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/oneflawlessstudio/nexus-platform.git
+    git clone https://github.com/flawlessstudio/nexus-platform.git
     cd nexus-platform
     ```
 2.  **Install Dependencies**:
