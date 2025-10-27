@@ -1,7 +1,7 @@
 {
   "name": "nexus-platform",
   "private": true,
-  "packageManager": "pnpm@9",
+  "packageManager": "pnpm@9.12.1",
   "engines": {
     "node": ">=20.0.0"
   },

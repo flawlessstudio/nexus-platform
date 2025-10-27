@@ -1,15 +1,19 @@
 import React from 'react';
 
 const ProfilePictureUploader = ({ onImageChange, currentImage }) => {
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        onImageChange(event.target.result);
-      };
-      reader.readAsDataURL(file);
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0];
+    if (!file || !onImageChange) {
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = (loadEvent) => {
+      if (typeof loadEvent.target?.result === 'string') {
+        onImageChange(loadEvent.target.result);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -28,13 +32,7 @@ const ProfilePictureUploader = ({ onImageChange, currentImage }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
         </label>
-        <input
-          id="profile-picture"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
+        <input id="profile-picture" type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
       </div>
       <p className="text-sm text-gray-500">Click to change profile picture</p>
     </div>

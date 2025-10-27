@@ -1,11 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Note: After migrating to Vite, these will be `import.meta.env.VITE_...`
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Supabase URL and Anon Key must be provided in environment variables.');
+let client = null;
+
+if (supabaseUrl && supabaseAnonKey) {
+  client = createClient(supabaseUrl, supabaseAnonKey);
+} else {
+  console.warn('Supabase URL and anon key are not configured. Authentication features are disabled.');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = client;
+export const isSupabaseConfigured = Boolean(client);
