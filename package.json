@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "pnpm -r --parallel dev",
-    "build": "pnpm -r --parallel build",
+    "build": "cd web && pnpm build",
     "lint": "pnpm -r --parallel lint",
     "doctor": "node tools/readiness_doctor.mjs || true",
     "doctor:ci": "CI=true node tools/readiness_doctor.mjs --open=false || true",
