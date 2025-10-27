@@ -6,6 +6,9 @@ yarn.lock
 # local env files
 .env
 **/.env
+backend/.env
+web/.env
+supabase/.env
 *.local
 
 # Vite / build
@@ -49,4 +52,5 @@ coverage/
 .vercel
 
 pnpm-lock.yaml !/pnpm-lock.yaml
-
+node_modules
+dist
