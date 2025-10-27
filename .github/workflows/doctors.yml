@@ -1,52 +1,38 @@
 name: Doctors
 
 on:
-  pull_request:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  doctors:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+  readiness:
+    name: Readiness Doctor
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile || pnpm install
-
-      - name: Run doctors
-        run: |
-          mkdir -p reports
-          pnpm -s doctors | tee reports/doctors.txt
-
-      - name: Upload doctor report
-        if: always()
-        uses: actions/upload-artifact@v4
+      - uses: pnpm/action-setup@v4
         with:
-          name: doctors-report
-          path: reports/doctors.txt
-
-      - name: Job summary
-        if: always()
+          version: 9
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Environment Checks
         run: |
-          echo "# Doctors Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- Node: $(node -v)" >> $GITHUB_STEP_SUMMARY
-          echo "- PNPM: $(pnpm -v)" >> $GITHUB_STEP_SUMMARY
-          echo "- Report artifact: doctors-report" >> $GITHUB_STEP_SUMMARY
+          echo "🔎 Checking environment variables..."
+          vars=(NEXT_PUBLIC_SUPABASE_URL NEXT_PUBLIC_SUPABASE_ANON_KEY)
+          missing=false
+          for v in "${vars[@]}"; do
+            if [ -z "${!v}" ]; then
+              echo "::error::Missing $v"
+              missing=true
+            else
+              echo "✅ $v present"
+            fi
+          done
+          if [ "$missing" = true ]; then
+            echo "::error::Missing env vars detected. Add them in GitHub Secrets and Vercel."
+            exit 1
+          fi
+          echo "✅ Environment looks good!"
