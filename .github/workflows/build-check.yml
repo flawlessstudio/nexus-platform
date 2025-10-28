@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    concurrency:
+      group: build-check-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
