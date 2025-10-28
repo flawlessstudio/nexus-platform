@@ -17,14 +17,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Print tool versions
         run: |
@@ -36,4 +36,3 @@ jobs:
 
       - name: Build web
         run: pnpm --filter web build
-
