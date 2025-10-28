@@ -17,39 +17,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ✅ Pin pnpm to a known-good version (no Corepack drift)
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.12.0  # pin it; keep in sync with your packageManager field
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: 20
+          cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Print tool versions
         run: |
           node -v
           pnpm -v
 
-      # 🚫 Keep --frozen-lockfile to enforce reproducibility
       - name: Install deps
         run: pnpm install --frozen-lockfile
 
-      # Optional (good hygiene): lint/typecheck if you have scripts
-      # - name: Lint web
-      #   run: pnpm --filter web lint
-      # - name: Typecheck web
-      #   run: pnpm --filter web typecheck || true
-
-      # 🏗️ Build the frontend (monorepo-aware)
       - name: Build web
         run: pnpm --filter web build
 
-      # 🩺 Only keep this if the script actually exists in package.json
-      # Otherwise remove this step to avoid false failures.
-      # - name: Run Sanity Doctor
-      #   run: pnpm sanity:strict
-  
