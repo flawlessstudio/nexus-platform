@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "web/package.json", "use": "@vercel/static-build", "config": { "distDir": "web/dist" } }
+  ],
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm --filter nexus-web build",
+  "routes": [
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
+
