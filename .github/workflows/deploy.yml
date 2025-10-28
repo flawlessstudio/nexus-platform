@@ -53,6 +53,7 @@ jobs:
           path: web/dist
 
   deploy:
+    if: ${{ github.event.repository.has_pages == true }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
