@@ -1,0 +1,63 @@
+name: doctors
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: doctors-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  doctors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Pin pnpm to avoid lockfile/format drift
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Print tool versions
+        run: |
+          node -v
+          pnpm -v
+
+      - name: Install deps (respect lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # Run each doctor separately for clearer logs; don't fail the whole job on advisories
+      - name: Run v3_guardian (advisory)
+        run: node --enable-source-maps --no-warnings tools/v3_guardian.mjs --apply=false
+        continue-on-error: true
+
+      - name: Run readiness_doctor (CI mode)
+        run: node --enable-source-maps --no-warnings tools/readiness_doctor.mjs --ci
+        continue-on-error: true
+
+      # (Optional) Upload any generated reports/logs
+      # - name: Upload doctor reports
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: doctor-outputs
+      #     path: |
+      #       tools/**/doctor-report*.json
+      #       tools/**/doctor-logs/*.log

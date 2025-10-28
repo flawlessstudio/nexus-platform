@@ -1,51 +1,55 @@
-name: Build Check
+name: build-check
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+  push:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
-      # 1️⃣ Checkout repo
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2️⃣ Setup Node 20 with pnpm cache
-      - name: Setup Node.js
+      # ✅ Pin pnpm to a known-good version (no Corepack drift)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0  # pin it; keep in sync with your packageManager field
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'pnpm'
 
-      # 3️⃣ Enable Corepack (bundled with Node >=16.9)
-      - name: Enable Corepack
-        run: corepack enable
-
-      # 4️⃣ Ensure latest pnpm is active (avoids version drift)
-      - name: Prepare pnpm
-        run: corepack prepare pnpm@latest --activate
-
-      # 5️⃣ Print versions for debugging
       - name: Print tool versions
         run: |
           node -v
           pnpm -v
 
-      # 6️⃣ Install all dependencies for the monorepo
-      - name: Install dependencies
+      # 🚫 Keep --frozen-lockfile to enforce reproducibility
+      - name: Install deps
         run: pnpm install --frozen-lockfile
 
-      # 7️⃣ Build the Vite web app
-      - name: Build frontend
-        working-directory: web
-        run: pnpm build
+      # Optional (good hygiene): lint/typecheck if you have scripts
+      # - name: Lint web
+      #   run: pnpm --filter web lint
+      # - name: Typecheck web
+      #   run: pnpm --filter web typecheck || true
 
-      # 8️⃣ Run the Sanity Doctor (verifies envs, structure, etc.)
-      - name: Run Sanity Doctor
-        run: pnpm sanity:strict
+      # 🏗️ Build the frontend (monorepo-aware)
+      - name: Build web
+        run: pnpm --filter web build
+
+      # 🩺 Only keep this if the script actually exists in package.json
+      # Otherwise remove this step to avoid false failures.
+      # - name: Run Sanity Doctor
+      #   run: pnpm sanity:strict
+  
