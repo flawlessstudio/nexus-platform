@@ -1,0 +1,21 @@
+# .github/workflows/cost-check.yml
+name: Cost Check
+
+on:
+  pull_request:
+    paths:
+      - 'infra/**'
+
+jobs:
+  infracost:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Infracost
+        uses: infracost/actions/setup@v2
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
+
+      # Placeholder for actual Infracost diff command

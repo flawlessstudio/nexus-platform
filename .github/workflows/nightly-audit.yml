@@ -1,0 +1,71 @@
+# .github/workflows/nightly-audit.yml
+name: Nightly Readiness Audit
+
+on:
+  schedule:
+    # Runs at 03:00 UTC every day
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Allows manual runs from the Actions tab
+
+jobs:
+  audit-and-notify:
+    name: Run Audit & Notify Slack
+    # Prevent multiple scheduled runs from overlapping
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: true
+    # Set minimum permissions for the job
+    permissions:
+      contents: write # To commit changes from --apply
+      pull-requests: write # To create pull requests if needed by a commit action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Audit Scripts
+        id: audits
+        uses: ./.github/actions/run-audits/
+
+      - name: Commit Changes
+        id: auto-commit-action
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(audit): apply automated fixes from nightly audit"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+      - name: Upload Readiness Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: readiness-doctor-report
+          path: ${{ steps.audits.outputs.doctor_report_path }}
+
+      - name: Upload V1 Guardian Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: v1-guardian-report
+          path: ${{ steps.audits.outputs.guardian_report_path }}
+
+      - name: Upload V2 Guardian Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-guardian-report
+          path: ${{ steps.audits.outputs.v2_guardian_report_path }}
+
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        if: success() && secrets.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: '🌙 Nightly Readiness Report'
+          SLACK_USERNAME: 'Readiness Bot'
+          SLACK_ICON_EMOJI: ':stethoscope:'
+          SLACK_COLOR: '#36a64f' # A nice green
+          SLACK_MESSAGE: |
+            *Nexus Platform Health Check*
+            ${{ steps.audits.outputs.guardian_status_line }}
+            ${{ steps.audits.outputs.v2_guardian_status_line }}
+            ${{ steps.audits.outputs.doctor_score_line }}
+            <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Full Report>
