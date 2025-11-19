@@ -1,0 +1,9 @@
+dimensions: 1080x1920
+format: mp4/png
+safe_zone: 176px
+modules:
+  - intro_frame
+  - menu_highlights
+  - CTA_swipe
+notes:
+  - Include vermouth ritual animation cues.

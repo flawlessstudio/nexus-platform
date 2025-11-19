@@ -1,0 +1,22 @@
+{
+  "id": "madre-taberna-moderna",
+  "name": "Madre Taberna Moderna",
+  "sector": ["hospitality", "restaurant"],
+  "status": "active",
+  "owner": "Flawless Studio",
+  "primary_locale": "es-ES",
+  "links": {
+    "website": "https://www.madretabernamoderna.com",
+    "figma_file": "figma://file/XXXX",
+    "notion_hub": "https://notion.so/madre",
+    "drive_folder": "https://drive.google.com/madre"
+  },
+  "design_tokens_file": "tokens.json",
+  "editorial_guide_file": "03-editorial-voice/editorial-guide.yml",
+  "default_campaign_channel_mix": ["instagram", "tiktok", "email", "in-store"],
+  "constraints": {
+    "logo_modifications_allowed": false,
+    "color_flexibility": "medium",
+    "tone_risk_level": "low"
+  }
+}

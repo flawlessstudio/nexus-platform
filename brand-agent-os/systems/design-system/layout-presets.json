@@ -1,0 +1,14 @@
+[
+  {
+    "id": "grid-12",
+    "columns": 12,
+    "gutter": 24,
+    "margin": 96
+  },
+  {
+    "id": "story-grid",
+    "columns": 4,
+    "gutter": 16,
+    "margin": 48
+  }
+]

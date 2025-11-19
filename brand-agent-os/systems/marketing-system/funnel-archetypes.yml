@@ -1,0 +1,8 @@
+warm-launch:
+  stages:
+    - stage: awareness
+      tactics: ["IG teaser", "press drop"]
+    - stage: consideration
+      tactics: ["email tasting notes", "chef AMA"]
+    - stage: conversion
+      tactics: ["booking CTA", "limited seats counter"]

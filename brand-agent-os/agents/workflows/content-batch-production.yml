@@ -1,0 +1,9 @@
+steps:
+  - agent: brand-strategist-v1
+    action: "prioritize content pillars"
+  - agent: copy-agent-v1
+    action: "produce copy batch"
+  - agent: visual-director-v1
+    action: "assign layouts"
+  - agent: performance-analyst-v1
+    action: "tag assets with KPIs"

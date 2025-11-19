@@ -1,0 +1,7 @@
+{
+  "id": "drive-docs",
+  "description": "Imports/export Google Drive docs tied to each brand",
+  "permissions": ["read"],
+  "paths": ["brands/*/06-knowledge"],
+  "rate_limit": "15/min"
+}

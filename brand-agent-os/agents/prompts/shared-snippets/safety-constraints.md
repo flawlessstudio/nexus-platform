@@ -1,0 +1,3 @@
+- No political endorsements.
+- No unverifiable health claims.
+- Escalate sensitive topics to human creative director.

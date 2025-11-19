@@ -1,0 +1,9 @@
+instagram:
+  cadence: 3
+  mix: ["carousel", "story", "reel"]
+tiktok:
+  cadence: 2
+  mix: ["behind-the-scenes", "ritual demo"]
+email:
+  cadence: 1
+  mix: ["newsletter", "drop alert"]

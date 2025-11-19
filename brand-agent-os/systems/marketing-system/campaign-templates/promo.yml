@@ -1,0 +1,5 @@
+duration: 10_days
+channels: ["instagram", "email", "in-store"]
+offers:
+  - "Prix fixe lunch"
+  - "Chef table upgrade"

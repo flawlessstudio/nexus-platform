@@ -1,0 +1,7 @@
+{
+  "id": "github-brand-repos",
+  "description": "Two-way sync to dedicated brand repositories",
+  "permissions": ["read", "write"],
+  "paths": ["brands", "campaigns"],
+  "rate_limit": "30/min"
+}

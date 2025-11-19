@@ -1,0 +1,7 @@
+phases:
+  - name: pre-launch
+    deliverables: ["teaser assets", "press release"]
+  - name: launch week
+    deliverables: ["hero film", "menu carousel", "email drop"]
+  - name: sustain
+    deliverables: ["ugc remix", "chef q&a"]

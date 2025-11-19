@@ -1,0 +1,12 @@
+{
+  "color": {
+    "neutral": {
+      "50": { "value": "#F8F8F8" },
+      "900": { "value": "#0F0F0F" }
+    }
+  },
+  "font": {
+    "sans": { "value": "Inter" },
+    "serif": { "value": "Canela" }
+  }
+}

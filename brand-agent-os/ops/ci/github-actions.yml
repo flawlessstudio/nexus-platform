@@ -1,0 +1,16 @@
+name: Validate Brand Agent OS
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: npm install ajv-cli
+      - name: Run validation script
+        run: bash ops/scripts/validate-all.sh

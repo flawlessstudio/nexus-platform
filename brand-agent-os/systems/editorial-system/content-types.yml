@@ -1,0 +1,6 @@
+landing_page:
+  required_sections: ["hero", "proof", "cta"]
+email_newsletter:
+  required_sections: ["intro", "feature", "cta"]
+ad_script:
+  required_sections: ["hook", "value", "cta"]

@@ -1,0 +1,7 @@
+{
+  "id": "figma-context",
+  "description": "Read-only access to component descriptions and token references in Figma",
+  "permissions": ["read"],
+  "paths": ["systems/design-system/figma-ids.yml"],
+  "rate_limit": "60/min"
+}

@@ -1,0 +1,2 @@
+- Respect Flawless Studio accessibility baseline (WCAG AA minimum).
+- Reference shared taxonomies for industries and archetypes when tagging outputs.
