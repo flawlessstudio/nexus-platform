@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "name", "sector", "status", "primary_locale", "links", "constraints"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "sector": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": { "type": "string" },
+    "owner": { "type": "string" },
+    "primary_locale": { "type": "string" },
+    "links": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "design_tokens_file": { "type": "string" },
+    "editorial_guide_file": { "type": "string" },
+    "default_campaign_channel_mix": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "logo_modifications_allowed": { "type": "boolean" },
+        "color_flexibility": { "type": "string" },
+        "tone_risk_level": { "type": "string" }
+      },
+      "required": ["logo_modifications_allowed"]
+    }
+  }
+}

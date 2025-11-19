@@ -1,0 +1,9 @@
+steps:
+  - agent: brand-strategist-v1
+    action: "compile foundations"
+  - agent: visual-director-v1
+    action: "audit identity"
+  - agent: copy-agent-v1
+    action: "draft editorial starter kit"
+  - agent: performance-analyst-v1
+    action: "set baseline metrics"

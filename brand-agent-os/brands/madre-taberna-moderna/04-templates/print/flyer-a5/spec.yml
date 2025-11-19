@@ -1,0 +1,13 @@
+format: A5
+orientation: portrait
+trim: 148mm x 210mm
+bleed: 3mm
+safe_zone: 8mm
+grid:
+  columns: 4
+  gutter: 6mm
+typography:
+  heading: Neue Haas Grotesk Display 56pt
+  body: Inter 11pt
+notes:
+  - Use accent paper texture background.

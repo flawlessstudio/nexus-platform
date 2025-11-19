@@ -1,0 +1,10 @@
+{
+  "card": {
+    "description": "Base card with padding, shadow, and optional media slot",
+    "tokens": ["spacing.md", "color.neutral.50"]
+  },
+  "cta-button": {
+    "description": "Primary CTA button with icon support",
+    "tokens": ["color.brand.primary", "font.sans"]
+  }
+}

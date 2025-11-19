@@ -1,0 +1,14 @@
+format: A4
+orientation: portrait
+trim: 210mm x 297mm
+bleed: 3mm
+safe_zone: 12mm
+grid:
+  columns: 6
+  gutter: 4mm
+typography:
+  headings: Neue Haas Grotesk Display 42pt
+  sections: Inter 16pt
+  notes: Inter 12pt italic
+notes:
+  - Include bilingual columns (es-ES left, en-GB right).

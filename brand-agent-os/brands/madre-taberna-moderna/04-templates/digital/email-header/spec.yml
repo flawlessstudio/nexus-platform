@@ -1,0 +1,11 @@
+dimensions: 600x300
+format: png/svg
+safe_zone: 40px
+grid:
+  columns: 6
+modules:
+  - logotype
+  - headline
+  - CTA_button
+notes:
+  - Optimize for dark mode safe colors.

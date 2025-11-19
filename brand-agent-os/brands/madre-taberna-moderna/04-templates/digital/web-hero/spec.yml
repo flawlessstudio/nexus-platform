@@ -1,0 +1,13 @@
+dimensions: 1440x720
+format: responsive
+safe_zone: 96px
+grid:
+  columns: 12
+  gutter: 24px
+modules:
+  - nav
+  - hero_copy
+  - CTA_primary
+  - background_media
+notes:
+  - Pair parallax imagery with minimal copy.

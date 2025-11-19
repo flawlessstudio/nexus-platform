@@ -1,0 +1,7 @@
+steps:
+  - agent: brand-strategist-v1
+    action: "update positioning"
+  - agent: visual-director-v1
+    action: "refresh templates"
+  - agent: copy-agent-v1
+    action: "revise editorial guide"

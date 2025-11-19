@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["brandId", "slug", "name", "objectives", "channels", "status"],
+  "properties": {
+    "brandId": { "type": "string" },
+    "slug": { "type": "string" },
+    "name": { "type": "string" },
+    "objectives": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "kpis": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "target_personas": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "channels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "assets_folder": { "type": "string" },
+    "status": { "type": "string" }
+  }
+}

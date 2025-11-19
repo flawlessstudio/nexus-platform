@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["tone", "voice", "structure", "language", "guardrails"],
+  "properties": {
+    "tone": { "type": "object" },
+    "voice": { "type": "object" },
+    "structure": { "type": "object" },
+    "language": { "type": "object" },
+    "guardrails": { "type": "object" }
+  }
+}

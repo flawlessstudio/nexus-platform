@@ -1,0 +1,6 @@
+reservations:
+  definition: "Total seated covers attributed to campaign period"
+  source: "Resy export"
+roas:
+  definition: "Revenue / Paid media spend"
+  source: "Ads Manager"

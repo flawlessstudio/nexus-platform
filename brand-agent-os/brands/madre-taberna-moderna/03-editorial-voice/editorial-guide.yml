@@ -1,0 +1,18 @@
+tone:
+  primary_adjectives: ["direct", "warm", "playful", "non-corporate"]
+  avoid: ["overly formal", "technical jargon"]
+voice:
+  person: "first-person plural"
+  reading_level: "B1-B2"
+  punctuation: "minimal emojis, no excessive exclamation marks"
+structure:
+  preferred_sentence_length: "8-18 words"
+  paragraph_length: "2-4 sentences"
+language:
+  default_locale: "es-ES"
+  allowed_languages: ["es-ES", "en-GB"]
+guardrails:
+  topics_to_avoid:
+    - "political commentary"
+    - "health claims"
+  legal_disclaimers_required: false

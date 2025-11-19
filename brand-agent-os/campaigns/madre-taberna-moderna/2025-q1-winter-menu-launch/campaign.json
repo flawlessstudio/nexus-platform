@@ -1,0 +1,11 @@
+{
+  "brandId": "madre-taberna-moderna",
+  "slug": "2025-q1-winter-menu-launch",
+  "name": "Winter Menu Launch 2025",
+  "objectives": ["increase_reservations", "menu_education"],
+  "kpis": ["reservations", "menu_item_orders", "instagram_engagement"],
+  "target_personas": ["local-foodies", "tourists"],
+  "channels": ["instagram", "tiktok", "email", "in-store"],
+  "assets_folder": "content/",
+  "status": "in-progress"
+}

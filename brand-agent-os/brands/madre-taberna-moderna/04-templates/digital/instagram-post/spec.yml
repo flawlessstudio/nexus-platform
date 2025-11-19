@@ -1,0 +1,9 @@
+dimensions: 1080x1350
+format: jpg/png
+safe_zone: 120px
+modules:
+  - hero_image
+  - headline
+  - caption_stub
+notes:
+  - Use split layout 60/40 with photo + type.

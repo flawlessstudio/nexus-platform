@@ -1,0 +1,9 @@
+steps:
+  - agent: brand-strategist-v1
+    action: "write campaign brief"
+  - agent: visual-director-v1
+    action: "outline asset matrix"
+  - agent: copy-agent-v1
+    action: "draft copy"
+  - agent: performance-analyst-v1
+    action: "set tracking plan"
